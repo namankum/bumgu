@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>  범 구 </title>
+<style>
+  body {
+    margin: 0;
+    padding: 40px 20px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+  }
+
+  .gallery {
+    display: grid;
+    gap: 10px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  /* 기본 5개 열 */
+  @media (min-width: 769px) {
+    .gallery {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+
+  /* 중간 크기 화면 - 3개 열 */
+  @media (min-width: 481px) and (max-width: 768px) {
+    .gallery {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* 작은 화면 - 2개 열 */
+  @media (max-width: 480px) {
+    .gallery {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .thumbnail {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    transition: transform 0.2s;
+    display: block;
+  }
+
+  .thumbnail:hover {
+    transform: scale(1.05);
+  }
+
+  #fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.95);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    cursor: pointer;
+  }
+
+  #fullscreen img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  }
+</style>
+</head>
+<body>
+
+<div class="gallery">
+  <img src="https://raw.githubusercontent.com/namankum/bumgu/main/0.jpg" alt="Image 0" class="thumbnail" />
+  <img src="https://raw.githubusercontent.com/namankum/bumgu/main/1.jpg" alt="Image 1" class="thumbnail" />
+  <img src="https://raw.githubusercontent.com/namankum/bumgu/main/2.jpg" alt="Image 2" class="thumbnail" />
+  <img src="https://raw.githubusercontent.com/namankum/bumgu/main/3.jpg" alt="Image 3" class="thumbnail" />
+  <img src="https://raw.githubusercontent.com/namankum/bumgu/main/4.jpg" alt="Image 4" class="thumbnail" />
+  <img src="https://raw.githubusercontent.com/namankum/bumgu/main/5.jpg" alt="Image 5" class="thumbnail" />
+  <img src="https://raw.githubusercontent.com/namankum/bumgu/main/6.jpg" alt="Image 6" class="thumbnail" />
+  <img src="https://raw.githubusercontent.com/namankum/bumgu/main/7.jpg" alt="Image 7" class="thumbnail" />
+  <img src="https://raw.githubusercontent.com/namankum/bumgu/main/8.jpg" alt="Image 8" class="thumbnail" />
+  <img src="https://raw.githubusercontent.com/namankum/bumgu/main/9.jpg" alt="Image 9" class="thumbnail" />
+</div>
+
+<div id="fullscreen" onclick="closeFullscreen()">
+  <img src="" id="fullscreen-img" alt="Expanded Image" />
+</div>
+
+<script>
+  const thumbnails = document.querySelectorAll('.thumbnail');
+  const fullscreen = document.getElementById('fullscreen');
+  const fullscreenImg = document.getElementById('fullscreen-img');
+
+  thumbnails.forEach(thumb => {
+    thumb.addEventListener('click', () => {
+      fullscreenImg.src = thumb.src;
+      fullscreen.style.display = 'flex';
+    });
+  });
+
+  function closeFullscreen() {
+    fullscreen.style.display = 'none';
+    fullscreenImg.src = '';
+  }
+</script>
+
+</body>
+</html>
